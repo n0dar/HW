@@ -32,7 +32,7 @@ postgres=#
 >и сделать таблицу с парой строк
 
 postgres=# CREATE DATABASE testdb;  
-CREATE DATABASE
+CREATE DATABASE 
 postgres=# \c testdb;  
 You are now connected to database "testdb" as user "postgres".  
 testdb=# CREATE TABLE t(f INT);   

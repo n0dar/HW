@@ -8,7 +8,7 @@
 >Настройте выполнение контрольной точки раз в 30 секунд
    
 `psql`  
-`ALTER SYSTEM SET checkpoint_timeout = 30;`
+`ALTER SYSTEM SET checkpoint_timeout = 30;  
 `ALTER SYSTEM SET wal_keep_size=1000;` — увеличиваю, так как при настройках по умолчанию WAL-файлы, скорее всего, начнут переиспользоваться и/или удаляться прямо во время работы утилиты, и я не смогу сделать их дамп, нужный мне для анализа  
 `ALTER SYSTEM SET log_checkpoints=on;` — включаем журналрование выполнения контрольных точек, жунал тоже буду анализировать  
 `ALTER SYSTEM SET log_destination=csvlog;` — устанавливает формат журналивроания в CSV  

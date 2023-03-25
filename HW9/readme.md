@@ -1,6 +1,6 @@
 `docker pull postgres:14`  
 `docker run --name pg -v c:\var\lib\postgresql\data:/var/lib/postgresql/data -e POSTGRES_PASSWORD=1 -d postgres:14`  
-`docker exec -t -i pg bash` 
+`docker exec -t -i pg bash`  
 `passwd postgres`    
 `login postgres`  
 `pgbench -i postgres`
@@ -8,7 +8,7 @@
 >Настройте выполнение контрольной точки раз в 30 секунд
    
 `psql`  
-`ALTER SYSTEM SET checkpoint_timeout = 30;  
+`ALTER SYSTEM SET checkpoint_timeout = 30;`    
 `ALTER SYSTEM SET wal_keep_size=1000;` — увеличиваю, так как при настройках по умолчанию WAL-файлы, скорее всего, начнут переиспользоваться и/или удаляться прямо во время работы утилиты, и я не смогу сделать их дамп, нужный мне для анализа  
 `ALTER SYSTEM SET log_checkpoints=on;` — включаем журналрование выполнения контрольных точек, жунал тоже буду анализировать  
 `ALTER SYSTEM SET log_destination=csvlog;` — устанавливает формат журналивроания в CSV  
@@ -115,7 +115,7 @@ stats_reset           | 2023-03-24 14:58:02.662067+00
 
 >Сравните tps в синхронном/асинхронном режиме утилитой pgbench
 
-`\q`
+`\q`  
 `pgbench -i postgres`
 
 по умолчанию synchronous_commit=on

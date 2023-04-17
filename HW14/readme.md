@@ -14,9 +14,9 @@
 172.17.0.3  
 
 `docker run --name vm3 -p 5433:5432 -e POSTGRES_PASSWORD=1 -d postgres:15`  
-`docker exec vm3 psql -U postgres -c 'CREATE TABLE t1(f VARCHAR); CREATE TABLE t2(f VARCHAR);' -c 'ALTER SYSTEM SET wal_level = replica;'`
-`echo host replication all samenet trust  >> /var/lib/postgresql/data/pg_hba.conf`
-`docker restart vm3`  
+`docker exec vm3 psql -U postgres -c 'CREATE TABLE t1(f VARCHAR); CREATE TABLE t2(f VARCHAR);' -c 'ALTER SYSTEM SET wal_level = replica;'`  
+`echo host replication all samenet trust  >> /var/lib/postgresql/data/pg_hba.conf`  
+`docker restart vm3`   
 `docker container inspect -f '{{ .NetworkSettings.IPAddress }}' vm3`     
 172.17.0.4  
 
@@ -37,7 +37,7 @@
 `apt update`  
 `apt install -y postgresql-15`  
 `rm -rf /var/lib/postgresql/15/main`  
-`login postgres`
+`login postgres`  
 `pg_basebackup -h 172.17.0.4 -p 5432 -R -D /var/lib/postgresql/15/main`  
 `pg_ctlcluster 15 main start`  
 
@@ -54,7 +54,7 @@ PRETTY_NAME="Debian GNU/Linux 11 (bullseye)"
 `docker rm vm4`  
 `docker pull debian:11`  
 `docker run --name vm4 -i -t debian:11 bash`  
-`apt update`
+`apt update` 
 `apt install -y lsb-release gnupg wget`  
 `sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'`  
 `wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -`  
@@ -64,7 +64,7 @@ PRETTY_NAME="Debian GNU/Linux 11 (bullseye)"
 `passwd postgres`   
 `login postgres`  
 `pg_basebackup -h 172.17.0.4 -p 5432 -R -D /var/lib/postgresql/15/main`  
-`pg_ctlcluster 15 main start`
+`pg_ctlcluster 15 main start` 
 
 все то же самое, хотя ОС на vm3 и vm4 все равно нужно было выровнять для физической репликации
 

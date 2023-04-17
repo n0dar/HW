@@ -2,14 +2,14 @@
 `docker exec vm1 psql -U postgres -c 'CREATE TABLE t1(f VARCHAR); CREATE TABLE t2(f VARCHAR);' -c 'ALTER SYSTEM SET wal_level = logical;'`  
 `docker restart vm1`  
 `docker exec vm1 psql -U postgres -c 'CREATE PUBLICATION VM1_T1 FOR TABLE t1;'`  
-`docker exec vm1 psql -U postgres -c 'CREATE PUBLICATION VM1_T2 FOR TABLE t2;'`
+`docker exec vm1 psql -U postgres -c 'CREATE PUBLICATION VM1_T2 FOR TABLE t2;'`  
 `docker container inspect -f '{{ .NetworkSettings.IPAddress }}' vm1`  
 172.17.0.2   
 
 `docker run --name vm2 -p 5432:5432 -e POSTGRES_PASSWORD=1 -d postgres:15`  
 `docker exec vm2 psql -U postgres -c 'CREATE TABLE t1(f VARCHAR); CREATE TABLE t2(f VARCHAR);' -c 'ALTER SYSTEM SET wal_level = logical;'`  
 `docker restart vm2`  
-`docker exec vm2 psql -U postgres -c 'CREATE PUBLICATION VM2 FOR TABLE t2;'`  
+`docker exec vm2 psql -U postgres -c 'CREATE PUBLICATION VM2 FOR TABLE t2;'`    
 `docker container inspect -f '{{ .NetworkSettings.IPAddress }}' vm2`     
 172.17.0.3  
 

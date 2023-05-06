@@ -19,7 +19,9 @@ FROM
 WHERE 
     relnamespace=(SELECT oid FROM pg_namespace WHERE nspname='bookings') 
 ORDER BY 
-    pg_relation_size(oid) DESC LIMIT 1;
+    pg_relation_size(oid) DESC 
+LIMIT 
+    1;
 ```  
 ticket_flights  
 
@@ -48,7 +50,12 @@ Referenced by:
 ```
 буду секционировать таблицу по flight_id
 ```sql 
-SELECT MIN(flight_id), MAX(flight_id), COUNT(DISTINCT flight_id) FROM bookings.ticket_flights;
+SELECT 
+    MIN(flight_id), 
+    MAX(flight_id), 
+    COUNT(DISTINCT flight_id) 
+FROM 
+    bookings.ticket_flights;
 ``` 
  min |  max  | count 
 -----|-------|-------
